@@ -1,0 +1,88 @@
+﻿@model FirstWebsite.Data.Models.OutOfOffice
+
+@{
+    ViewBag.Title = "CreateOutOfOffice";
+}
+
+<h2>Create Out Of Office Request</h2>
+
+@using (Html.BeginForm("CreateOutOfOffice", "RequestEntry", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Out Of Office</h4>
+    <hr />
+    <div>
+        @Html.HiddenFor(model => model.userID)
+    </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @*        <div class="form-group">
+            @Html.LabelFor(model => model.userName, "First and Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    *@
+    <div>
+        @Html.HiddenFor(@model => model.userName)
+    </div>
+    <div>
+        @Html.HiddenFor(@model => model.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.requestStartDate, "Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.requestStartDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.requestStartDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.requestEndDate, "End Date", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.requestEndDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.requestEndDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.requestDescription, "Comment", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.requestDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.requestDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div>
+        @Html.HiddenFor(model => model.requestType)
+    </div>
+    <div>
+        @Html.HiddenFor(model => model.daysOff)
+    </div>
+
+    <div>
+        @Html.HiddenFor(model => model.dateSubmitted)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.oooType, "Out of Office Choice", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.oooType, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.oooType, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

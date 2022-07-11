@@ -1,0 +1,31 @@
+﻿@model FirstWebsite.Data.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+<br />
+<div class="row">
+    <div class="col-sm-push-10">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.userName, "User Name")
+                        @Html.TextBoxFor(m => m.userName, "", new { @class = "form-control", @placeholder = "Enter User Name" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.passWord,"Password")
+                        @Html.PasswordFor(m => m.passWord, new { @class = "form-control", @placeholder = "Enter Password" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" class="requestButton" value="Login" />
+                        <input type="button" class="requestButton" 
+                               value="Register" onclick="@("window.location.href='" + @Url.Action("Register", "Home") + "'");" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

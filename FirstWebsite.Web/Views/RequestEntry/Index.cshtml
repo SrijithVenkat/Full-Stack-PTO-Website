@@ -1,0 +1,244 @@
+﻿@using FirstWebsite.Web.Models
+@model IndexVM
+
+<div>
+    <div class="row col-sm-2">
+        <h3>
+            PTO
+        </h3>
+    </div>
+    <div class="row col-sm-3">
+        <button onclick="location.href = '/RequestEntry/CreatePTO'; 
+    "style=" margin-left: 5em; margin-top: 15px" class="requestButton">Add New PTO Request</button>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Requester
+            </th>
+            <th>
+                PTO Days
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Date Submitted
+            </th>
+            <th>
+                Comment
+            </th>
+        </tr>
+
+        <tbody>
+            @foreach (var item in Model.PTOs)
+            {
+                var user = Model.Users.FirstOrDefault(r => r .userId == item.userID);
+
+                <tr>
+                    <td>
+                        @user.firstName  @user.lastName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.daysOff)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateSubmitted)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestDescription)
+                    </td>
+                    @if (Session["isAdmin"].Equals(true) || Session["idUser"].ToString() == item.userID.ToString())
+                    {
+                        <td>
+                            <div class="text-right">
+                                <button title="Edit PTO" class="searchUser" onclick="@("window.location.href='" + @Url.Action("EditPTO", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-edit">
+                                    </span>
+                                </button>
+                                <button title="Delete PTO" class="removeUser" onclick="@("window.location.href='" + @Url.Action("DeletePTO", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-trash">
+                                    </span>
+                                </button>
+                                <button title="PTO Details" class="addUser" onclick="@("window.location.href='" + @Url.Action("PTODetails", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-list">
+                                    </span>
+                                </button>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>  
+    </table>
+</div>
+<br />
+<div>
+    <div class="row col-sm-2">
+        <h3>
+            Out of Office
+        </h3>
+    </div>
+    <div class="row col-sm-3">
+        <button onclick="location.href = '/RequestEntry/CreateOutOfOffice';
+                "style=" margin-left: 5em; margin-top: 15px" class="requestButton">Add New Out of Office Request</button>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Requester
+            </th>
+            <th>
+                Out of Office Days
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Out of Office Reason
+            </th>
+            <th>
+                Comment
+            </th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model.OutOfOffices)
+            {
+                var user = Model.Users.FirstOrDefault(r => r.userId == item.userID);
+                <tr>
+                    <td>
+                        @user.firstName  @user.lastName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.daysOff)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.oooType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestDescription)
+                    </td>
+                    @if (Session["isAdmin"].Equals(true) || Session["idUser"].ToString() == item.userID.ToString())
+                    {
+                        <td>
+                            <div class="text-right">
+                                <button title="Edit PTO" class="searchUser" onclick="@("window.location.href='" + @Url.Action("EditOutOfOffice", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-edit">
+                                    </span>
+                                </button>
+                                <button title="Delete PTO" class="removeUser" onclick="@("window.location.href='" + @Url.Action("DeleteOutOfOffice", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-trash">
+                                    </span>
+                                </button>
+                                <button title="PTO Details" class="addUser" onclick="@("window.location.href='" + @Url.Action("OutOfOfficeDetails", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-list">
+                                    </span>
+                                </button>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<div>
+    <div class="row col-sm-2">
+        <h3>
+            Tegrit Events
+        </h3>
+    </div>
+    <div class="row col-sm-3">
+        <button onclick="location.href = '/RequestEntry/CreateEvent';
+            "style=" margin-left:5em; margin-top:15px"class="requestButton">Add New Event</button>
+    </div>
+    <table class="table">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Event Creator
+            </th>
+            <th>
+                Begin Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th>
+                Preview Days
+            </th>
+            <th>
+                Description
+            </th>
+
+        </tr>
+        <tbody>
+            @foreach (var item in Model.Events)
+            {
+                var user = Model.Users.FirstOrDefault(r => r.userId == item.userID);
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @user.firstName  @user.lastName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.previewDays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.requestDescription)
+                    </td>
+                    @if (Session["isAdmin"].Equals(true) || Session["idUser"].ToString() == item.userID.ToString())
+                    {
+                        <td>
+                            <div class="text-right">
+                                <button title="Edit PTO" class="searchUser" onclick="@("window.location.href='" + @Url.Action("EditEvent", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-edit">
+                                    </span>
+                                </button>
+                                <button title="Delete PTO" class="removeUser" onclick="@("window.location.href='" + @Url.Action("DeleteEvent", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-trash">
+                                    </span>
+                                </button>
+                                <button title="PTO Details" class="addUser" onclick="@("window.location.href='" + @Url.Action("EventDetails", "RequestEntry", new {id = item.requestId}) +"'");">
+                                    <span class="glyphicon glyphicon-list">
+                                    </span>
+                                </button>
+                            </div>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

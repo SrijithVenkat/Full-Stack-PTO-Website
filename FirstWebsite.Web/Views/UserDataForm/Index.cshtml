@@ -1,0 +1,73 @@
+﻿@model IEnumerable<FirstWebsite.Data.Models.User>
+
+<div>
+    <h2>Users</h2>
+    <h10>
+        <b>
+            Search By Name
+        </b>
+    </h10>
+</div>
+<form asp-controller="UserDataForm" asp-action="Index" method="get">
+    <p>
+        Name: <input type="text" name="searchString" />
+        <input type="submit" value="Filter" class="searchUser" />
+        <button onclick="location.href = '/UserDataForm/Index';" class="clearBox">Clear</button>
+    </p>
+</form>
+<div>
+    <button onclick="location.href = '/UserDataForm/Create';" class="addUser">Add User</button>
+</div>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Active
+        </th>
+        <th>
+            Approver
+        </th>
+        <th>
+            Admin
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var fullName = item.firstName + " " + item.lastName;
+        <tr>
+            <td>
+                @Html.ActionLink(fullName, "Details", new { id = item.userId , Style = "color:Black" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isApprover)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isAdmin)
+            </td>
+            <td>
+                @if (Session["isAdmin"].Equals(true) || Session["idUser"].ToString() == item.userId.ToString())
+                {
+                    @*                    <br />
+                @Html.ActionLink(" ", "Edit", new { id = item.userId }, new { @class = "glyphicon glyphicon-edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.userId }, new { @class = "glyphicon glyphicon-trash delete" })
+            <br />*@
+                    <button class="searchUser" onclick="@("window.location.href='" + @Url.Action("Edit", "UserDataForm", new {id = item.userId}) +"'");">
+                        <span class="glyphicon glyphicon-edit">
+                        </span>
+                    </button>
+                    <button class="removeUser" onclick="@("window.location.href='" + @Url.Action("Delete", "UserDataForm", new {id = item.userId}) +"'");">
+                        <span class="glyphicon glyphicon-trash">
+                        </span>
+                    </button>
+                }
+            </td>
+        </tr>
+    }
+</table>

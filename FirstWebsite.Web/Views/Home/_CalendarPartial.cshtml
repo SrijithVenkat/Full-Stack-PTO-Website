@@ -1,0 +1,23 @@
+﻿<center>
+    <div class="row">
+        @*        <div>
+            @Html.ActionLink("Test Button", "../UserDataForm")
+        </div>*@
+        <button onclick="location.href = '/RequestEntry/CreatePTO';" style="margin-bottom: 100px; padding: 30px"
+                class="front-button">
+            Add New PTO Request
+        </button>
+        <button onclick="location.href = '/RequestEntry/CreateOutOfOffice'" ; style="margin-bottom: 100px; padding: 30px"
+                class="front-button">
+            Add New Out of Office Request
+        </button>
+        <div class="col-xs-9 col-xs-pull-3">
+            <div class="box box-primary">
+                <div class="box-body no-padding">
+                    <!-- THE CALENDAR -->
+                    <div id="teamcalendar" style="width: 200%;"></div>
+                </div><!-- /.box-body -->
+            </div><!-- /. box -->
+        </div><!-- /.col -->
+    </div>
+</center>

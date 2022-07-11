@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+    <!-- qTip -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css" />
+
+    <!-- Full Calendar -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.print.css" media="print" />
+    <link rel="stylesheet" href="~/Content/PTOBox.css" />
+    <link rel="stylesheet" href="~/Content/UserPageStyle.css" />
+    <link rel="stylesheet" href="~/Content/RequestStyle.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+
+
+    @* Custom *@
+    @Styles.Render("~/Content/css/fullcalendar.css")
+
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            font-size: 14px;
+        }
+        .navbar {
+            background-color: #404040;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .navbar-brand:hover{
+            background-color:  darkgray;
+        }    
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+               <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Company Name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Session["idUser"] != null)
+                    {
+                        <li>@Html.ActionLink("Requests", "Index", "RequestEntry")</li>
+                        <li>@Html.ActionLink("Users", "Index", "UserDataForm")</li>
+                        <li>@Html.ActionLink("Team Calendar", "Index", "TeamCalendar")</li>
+                    }
+                </ul>
+                @if (Session["idUser"] != null)
+                {
+@*                    Session["idUser"] = null;*@
+                    @*<a href="@Url.Action("Logout","Home")" style="margin-top: 10px; margin-left: 10px; float: right" class="requestButton">Logout</a>*@
+                    <button onclick="location.href = '/Home/Logout';"
+                        style=" float: right; margin-left: 10px; margin-top: 10px" class="requestButton">Logout</button>
+                    <br />
+                    <p class="loggedInName" style=" margin-bottom: 15px; color:gray; float: right">Hello, @Session["FullName"].ToString() !</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <center>
+                <p>&copy; @DateTime.Now.Year - Srijith Venkateshwaran, ASP.NET Application</p>
+            </center>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!-- Include moment-->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- qTip -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.js"></script>
+
+    <!-- Full Calendar -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
+    @Scripts.Render("~/bundles/Script-calendar")
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

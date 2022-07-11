@@ -1,0 +1,117 @@
+﻿@model FirstWebsite.Data.Models.Event
+
+@{
+    ViewBag.Title = "EventDetails";
+}
+
+<h2>EventDetails</h2>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        @Html.HiddenFor(model => model.requestType)
+        @Html.HiddenFor(model => model.userID)
+
+        <dt>
+            Username
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+            Start Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.requestStartDate)
+        </dd>
+
+        <dt>
+            End Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.requestEndDate)
+        </dd>
+
+        <dt>
+            Date Submitted
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateSubmitted)
+        </dd>
+
+        <dt>
+            Event Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.eventType)
+        </dd>
+
+        <dt>
+            Request Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.requestDescription)
+        </dd>
+
+        <dt>
+            Preview Days
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.previewDays)
+        </dd>
+
+        <dt>
+            Recurring Choice
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recurringChoice)
+        </dd>
+
+        <dt>
+            Recurring Days between Occurrences
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recurringDaysBetweenOccurrence)
+        </dd>
+
+        <dt>
+            Recurring Number of Days
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recurringNumberOfDays)
+        </dd>
+
+        <dt>
+            HTML Description
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.htmlDesc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditEvent", new { id = Model.requestId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<FirstWebsite.Data.Models.User>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*<div class="row">
+        <div class="panel-heading">
+            <div class="col-md-8  custom-heading3">
+                <h3>
+                                        <i class="fa fa-calendar"></i>
+                        <span>@DateTime.Now.Year PTO </span>
+                </h3>
+            </div>
+        </div>
+    </div>*@
+@*<div class="jumbotron">
+    <h1> Srijith's First Website</h1>
+    <p class="lead">Please enter all your information in another tab.</p>
+</div>*@
+
+<div class="ptoOutSpacing">
+    <section>
+        @Html.Partial("PTOPartial")
+    </section>
+</div>
+
+<div class="row">
+    <section>
+        @Html.Partial("_CalendarPartial")
+    </section>
+</div>
